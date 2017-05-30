@@ -1,0 +1,42 @@
+This code was used to generate results published in the paper, 'Rapid Identification of Genes Controlling Virulence and Immunity in Malaria Parasites' by Abkallo et al.  These notes are written by Chris Illingworth.
+
+A standard GSL optimisation routine was used to fit a variety of models to sequenced allele frequencies
+
+OneFreq: Fits a single allele frequency to the data
+
+To compile use:
+
+make one
+
+Command line for this model is:
+
+./run_onefreq <file> <random seed> <reps> <beta>
+
+where <file> contains the input allele frequencies, <random seed> initialises the random number generator, <reps> specifies how many replicate calcualations to run, and <beta> is the noise parameter characterising the beta-binomial model.  Note that beta is equal to the shrink parameter from the jump-diffusion code.
+
+
+SingleDriver: Fits a model of allele frequencies given the presence of a single allele under positive selection
+
+make one compiles run_onetimesel
+
+./run_onetimesel <file> <random seed> <reps> <beta>
+
+This optimises model for a given dataset, finding a set of optimised parameters for each replicate optimisation.  The model assumes a single local rate of recombination
+ 
+
+SingleDriverRhoXStay: Fits a model of allele frequencies
+
+Compiled using make one
+
+./run_onetimeselrhoX_stay <file> <random seed> <reps> <beta> <locus>
+
+This optimises a model for a given dataset, finding a set of optimised parameters for each replicate optimisation.  The model assumes that there are two local rates of recombination, which change in a stepwise fashion at a given locus.
+
+In order to obtain better results from the optimisation routine, this code specifies a locus at which selection might be found, and optimises the remaining parameters of the model.  Code was run across a range of input loci.
+
+
+SingleDriver2RhoXStay and SingleDriver3RhoXStay:
+
+Work as does the SingleDriverRhoXStay model, but with three and four local rates of recombination, with two and three recombination rate change points. 
+
+
