@@ -1,0 +1,19 @@
+This code was used to generate results published in the paper, 'Rapid Identification of Genes Controlling Virulence and Immunity in Malaria Parasites' by Abkallo et al.  Primary credit in developing the code goes to Andrej Fischer.  These notes are written by Chris Illingworth.
+
+Two steps were performed in fitting the code to the sequence data.
+
+1. Application of a diffusion model with no jumps.  Options were applied as follows
+  --grid 250 : Sets the size of the grid upon which the discretisation of the model is perfomed
+  --mode 2 : Specifies a beta-binomial model
+  --nojump : Specifies that jumps were not allowed in the diffusion process
+
+This generated an inferred value for the shrink parameter, which categorises the variance of the beta-binomial model, and the proportion of errors rnd (points excluded by the beta-binomial model).
+
+Data from this run were used to identify and exclude errors (as might occur from incorrect mapping of reads) from the data.
+
+2. Application of a jump-diffusion model.  Options were applied as follows
+  --grid 250
+  --mode 2
+  --shrink s : Where s was the inferred beta-binomial parameter for a dataset from step 1.
+
+This fitted a jump-diffusion model to the data.  The inferred jump locations were used to parse the data for further analysis
